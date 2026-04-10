@@ -18,7 +18,7 @@
       color: #333; 
     }
 
-    /* Logo Swipe Animation */
+    /* Logo Animation */
     .logo {
       font-size: 2.2rem; 
       font-weight: 800; 
@@ -28,15 +28,12 @@
       overflow: hidden;
     }
     .logo::before {
-      content: "";
+      content: "Tlotlo's Homely";
       position: absolute; 
       left: -100%; 
       animation: logoSwipe 1.8s ease-out forwards;
     }
-    @keyframes logoSwipe { 
-      0% { left: -100%; } 
-      100% { left: 0; } 
-    }
+    @keyframes logoSwipe { 0% { left: -100%; } 100% { left: 0; } }
 
     header {
       background: white;
@@ -62,14 +59,11 @@
       text-decoration: none;
       color: var(--dark);
       font-weight: 500;
-      transition: color 0.3s;
     }
     
-    .nav-links a:hover { 
-      color: var(--primary); 
-    }
+    .nav-links a:hover { color: var(--primary); }
 
-    .post-btn {
+    .rent-buy-btn {
       padding: 10px 25px;
       background: var(--primary);
       color: white;
@@ -88,22 +82,11 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
-    h1 { 
-      text-align: center; 
-      margin-bottom: 2rem; 
-      color: var(--dark); 
-    }
+    h1 { text-align: center; margin-bottom: 2rem; color: var(--dark); }
 
-    form { 
-      display: grid; 
-      gap: 1.4rem; 
-    }
+    form { display: grid; gap: 1.4rem; }
 
-    label { 
-      font-weight: 600; 
-      margin-bottom: 6px; 
-      display: block; 
-    }
+    label { font-weight: 600; margin-bottom: 6px; display: block; }
 
     input, select, textarea {
       width: 100%;
@@ -153,9 +136,7 @@
       margin-top: 1rem;
     }
     
-    button[type="submit"]:hover { 
-      background: #1e40af; 
-    }
+    button[type="submit"]:hover { background: #1e40af; }
 
     footer {
       background: var(--dark); 
@@ -164,15 +145,54 @@
       padding: 3rem 2rem; 
       margin-top: 5rem;
     }
+
+    /* Login Overlay */
+    #login-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .login-box {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      width: 340px;
+      text-align: center;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 14px;
+      margin: 15px 0;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+
+    .login-box button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Fixed Navigation Bar -->
+  <!-- Navigation -->
   <header>
     <nav>
       <a href="index.html" class="logo">Tlotlo's Homely Property</a>
-      
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="buy.html">Buy</a>
@@ -182,9 +202,7 @@
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
-
-      <!-- Rent/Buy Button -->
-      <button onclick="alert('Login / Register feature coming soon!')" class="post-btn">
+      <button onclick="alert('Login / Register feature coming soon!')" class="rent-buy-btn">
         Rent / Buy
       </button>
     </nav>
@@ -256,13 +274,43 @@
     </form>
   </div>
 
+  <!-- Password Protection Overlay -->
+  <div id="login-overlay">
+    <div class="login-box">
+      <h2>🔐 Admin Access Required</h2>
+      <p>Enter password to post new properties</p>
+      <input type="password" id="admin-password" placeholder="Enter password" onkeypress="if(event.key==='Enter') checkPassword()">
+      <button onclick="checkPassword()">Login</button>
+      <p id="error-msg" style="color:red; margin-top:15px; display:none;">Incorrect password. Try again.</p>
+    </div>
+  </div>
+
   <footer>
     <p>&copy; 2026 Tlotlo's Homely Property - Real Estate Botswana. All Rights Reserved.</p>
     <p>Made for you in Gaborone ❤️</p>
   </footer>
 
   <script>
+    const ADMIN_PASSWORD = "tlotlo123";   // ← CHANGE THIS TO YOUR OWN SECURE PASSWORD!
+
     let selectedImageBase64 = "";
+
+    function showLogin() {
+      document.getElementById('login-overlay').style.display = 'flex';
+      document.getElementById('admin-password').focus();
+    }
+
+    function checkPassword() {
+      const entered = document.getElementById('admin-password').value.trim();
+      if (entered === ADMIN_PASSWORD) {
+        document.getElementById('login-overlay').style.display = 'none';
+        localStorage.setItem('adminLoggedInPost', 'true');
+      } else {
+        const error = document.getElementById('error-msg');
+        error.style.display = 'block';
+        setTimeout(() => error.style.display = 'none', 2500);
+      }
+    }
 
     // Image Upload Handling
     const dropArea = document.getElementById('drop-area');
@@ -272,7 +320,7 @@
 
     function handleFile(file) {
       if (!file.type.startsWith('image/')) {
-        alert("Please upload an image file only (jpg, png, webp, etc.)");
+        alert("Please upload an image file only.");
         return;
       }
 
@@ -301,9 +349,7 @@
     dropArea.addEventListener('drop', (e) => {
       e.preventDefault();
       dropArea.classList.remove('dragover');
-      if (e.dataTransfer.files.length > 0) {
-        handleFile(e.dataTransfer.files[0]);
-      }
+      if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
     });
 
     // Form Submission
@@ -336,18 +382,31 @@
 
       alert("✅ Property posted successfully with photo!");
 
+      // Reset form
       this.reset();
       imagePreview.style.display = 'none';
       fileNameDisplay.textContent = '';
       selectedImageBase64 = "";
 
-      // Redirect based on type
+      // Redirect
       if (newProperty.type === "rent") {
         window.location.href = "rent.html";
       } else {
         window.location.href = "buy.html";
       }
     });
+
+    // Auto-check login on page load
+    window.onload = function() {
+      if (localStorage.getItem('adminLoggedInPost') !== 'true') {
+        showLogin();
+      }
+    };
+
+    // Auto logout after 45 minutes for security
+    setTimeout(() => {
+      localStorage.removeItem('adminLoggedInPost');
+    }, 45 * 60 * 1000);
   </script>
 </body>
 </html>
