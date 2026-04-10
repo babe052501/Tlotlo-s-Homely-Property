@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post New Property - Tlotlo's Homely Property</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root { 
+      --primary: #2563eb; 
+      --dark: #1e2937; 
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      background: #f8fafc; 
+      color: #333; 
+    }
+
+    /* Logo Swipe Animation */
+    .logo {
+      font-size: 2.2rem; 
+      font-weight: 800; 
+      color: var(--primary);
+      text-decoration: none; 
+      position: relative; 
+      overflow: hidden;
+    }
+    .logo::before {
+      content: "";
+      position: absolute; 
+      left: -100%; 
+      animation: logoSwipe 1.8s ease-out forwards;
+    }
+    @keyframes logoSwipe { 
+      0% { left: -100%; } 
+      100% { left: 0; } 
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .nav-links a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover { 
+      color: var(--primary); 
+    }
+
+    .post-btn {
+      padding: 10px 25px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .form-container {
+      max-width: 800px;
+      margin: 3rem auto;
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h1 { 
+      text-align: center; 
+      margin-bottom: 2rem; 
+      color: var(--dark); 
+    }
+
+    form { 
+      display: grid; 
+      gap: 1.4rem; 
+    }
+
+    label { 
+      font-weight: 600; 
+      margin-bottom: 6px; 
+      display: block; 
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+
+    /* Image Upload Area */
+    .image-upload {
+      border: 3px dashed #ccc;
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .image-upload:hover {
+      border-color: var(--primary);
+      background: #f0f7ff;
+    }
+
+    .image-upload.dragover {
+      border-color: var(--primary);
+      background: #e0f0ff;
+    }
+
+    #image-preview {
+      max-width: 100%;
+      max-height: 320px;
+      margin: 15px auto;
+      border-radius: 12px;
+      display: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    button[type="submit"] {
+      background: var(--primary);
+      color: white;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    
+    button[type="submit"]:hover { 
+      background: #1e40af; 
+    }
+
+    footer {
+      background: var(--dark); 
+      color: white; 
+      text-align: center; 
+      padding: 3rem 2rem; 
+      margin-top: 5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed Navigation Bar -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Tlotlo's Homely Property</a>
+      
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="buy.html">Buy</a>
+        <a href="rent.html">Rent</a>
+        <a href="post-property.html">Post Property</a>
+        <a href="my-listings.html">My Listings</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <!-- Rent/Buy Button -->
+      <button onclick="alert('Login / Register feature coming soon!')" class="post-btn">
+        Rent / Buy
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Form -->
+  <div class="form-container">
+    <h1>Post a New Property</h1>
+    <form id="postForm">
+      <label>Property Title</label>
+      <input type="text" id="title" required placeholder="e.g. Modern 4 Bedroom Family Home">
+
+      <label>Location</label>
+      <input type="text" id="location" required placeholder="e.g. Gaborone, Block 7">
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div>
+          <label>Type</label>
+          <select id="type" required>
+            <option value="buy">For Sale</option>
+            <option value="rent">For Rent</option>
+          </select>
+        </div>
+        <div>
+          <label>Price (BWP)</label>
+          <input type="number" id="price" required placeholder="1850000">
+        </div>
+      </div>
+
+      <label>Property Type</label>
+      <select id="propertyType">
+        <option value="House">House</option>
+        <option value="Apartment">Apartment</option>
+        <option value="Villa">Villa</option>
+      </select>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+        <div>
+          <label>Bedrooms</label>
+          <input type="number" id="bedrooms" value="3" min="1">
+        </div>
+        <div>
+          <label>Bathrooms</label>
+          <input type="number" id="bathrooms" value="2" min="1">
+        </div>
+        <div>
+          <label>Size (m²)</label>
+          <input type="text" id="size" placeholder="250">
+        </div>
+      </div>
+
+      <label>Upload Photo of the House</label>
+      <div class="image-upload" id="drop-area">
+        <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #999; margin-bottom: 10px;"></i>
+        <p>Drag & drop your photo here<br>or</p>
+        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+        <button type="button" onclick="document.getElementById('imageInput').click()" 
+                style="background:#2563eb; padding:10px 25px; font-size:1rem; border:none; border-radius:8px;">
+          Choose Photo
+        </button>
+        <p id="file-name" style="margin-top:10px; font-size:0.9rem; color:#666;"></p>
+      </div>
+      <img id="image-preview" alt="Preview">
+
+      <label>Description (Optional)</label>
+      <textarea id="description" rows="4" placeholder="Brief description of the property..."></textarea>
+
+      <button type="submit">Post Property Now</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Tlotlo's Homely Property - Real Estate Botswana. All Rights Reserved.</p>
+    <p>Made for you in Gaborone ❤️</p>
+  </footer>
+
+  <script>
+    let selectedImageBase64 = "";
+
+    // Image Upload Handling
+    const dropArea = document.getElementById('drop-area');
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('image-preview');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    function handleFile(file) {
+      if (!file.type.startsWith('image/')) {
+        alert("Please upload an image file only (jpg, png, webp, etc.)");
+        return;
+      }
+
+      fileNameDisplay.textContent = file.name;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        selectedImageBase64 = e.target.result;
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    imageInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) handleFile(e.target.files[0]);
+    });
+
+    dropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropArea.classList.add('dragover');
+    });
+
+    dropArea.addEventListener('dragleave', () => dropArea.classList.remove('dragover'));
+
+    dropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropArea.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    // Form Submission
+    document.getElementById('postForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!selectedImageBase64) {
+        alert("Please upload a photo of the property before posting!");
+        return;
+      }
+
+      const newProperty = {
+        id: Date.now(),
+        type: document.getElementById('type').value,
+        title: document.getElementById('title').value,
+        location: document.getElementById('location').value,
+        price: parseInt(document.getElementById('price').value),
+        propertyType: document.getElementById('propertyType').value,
+        bedrooms: parseInt(document.getElementById('bedrooms').value),
+        bathrooms: parseInt(document.getElementById('bathrooms').value),
+        size: (document.getElementById('size').value || "0") + " m²",
+        img: selectedImageBase64,
+        description: document.getElementById('description').value || "",
+        status: "Available"
+      };
+
+      let properties = JSON.parse(localStorage.getItem('properties')) || [];
+      properties.push(newProperty);
+      localStorage.setItem('properties', JSON.stringify(properties));
+
+      alert("✅ Property posted successfully with photo!");
+
+      this.reset();
+      imagePreview.style.display = 'none';
+      fileNameDisplay.textContent = '';
+      selectedImageBase64 = "";
+
+      // Redirect based on type
+      if (newProperty.type === "rent") {
+        window.location.href = "rent.html";
+      } else {
+        window.location.href = "buy.html";
+      }
+    });
+  </script>
+</body>
+</html>
