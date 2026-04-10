@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Tlotlo's Homely Property</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #1e2937;
+      --light: #f8fafc;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #f8fafc; }
+
+    /* Logo Swipe Animation - Same as main page */
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      animation: logoSwipe 1.8s ease-out forwards;
+    }
+
+    @keyframes logoSwipe {
+      0% { left: -100%; opacity: 0; }
+      50% { opacity: 1; }
+      100% { left: 0; opacity: 1; }
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      margin-left: 2rem;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+    }
+    
+    .nav-links a:hover { color: var(--primary); }
+
+    .about-hero {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('https://source.unsplash.com/random/1600x900/?botswana-house') center/cover no-repeat;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .value-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .value-card i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Tlotlo's Homely Property</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="buy.html">Buy</a>
+        <a href="rent.html">Rent</a>
+        <a href="post-property.html">Post Property</a>
+        <a href="my-listings.html">My Listings</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button onclick="alert('Post Property coming soon!')" style="padding:10px 25px; background:var(--primary); color:white; border:none; border-radius:12px; cursor:pointer;">
+        Rent/Buy
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="about-hero">
+    <div style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">About Tlotlo's Homely Property</h1>
+      <p style="font-size: 1.4rem;">Your trusted real estate partner in Botswana</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="about-content">
+      <h2>Who We Are</h2>
+      <p>
+        Tlotlo's Homely Property is a modern real estate platform dedicated to helping people in Botswana find their perfect home. 
+        Whether you're looking to rent a comfortable apartment, or sell your property, 
+        we make the process simple, transparent, and stress-free.
+      </p>
+      <br>
+      <p>
+        Founded in Gaborone, we understand the local market deeply — from Phakalane and Block 7 to Mogoditshane and Francistown. 
+        Our mission is to connect buyers, renters, and sellers with the best properties across the country.
+      </p>
+    </div>
+
+    <div class="values">
+      <div class="value-card">
+        <i class="fas fa-home"></i>
+        <h3>Quality Homes</h3>
+        <p>We only list carefully verified properties that meet high standards.</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-handshake"></i>
+        <h3>Trust & Transparency</h3>
+        <p>Honest pricing, clear information, and direct communication with owners.</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-users"></i>
+        <h3>Local Expertise</h3>
+        <p>Our team knows the Botswana real estate market inside out.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Tlotlo's Homely Property - Real Estate Botswana. All Rights Reserved.</p>
+    <p>Made for you in Gaborone ❤️</p>
+  </footer>
+
+</body>
+</html>
