@@ -252,27 +252,36 @@
 </head>
 <body>
 
-  <!-- Navigation Bar with Rent/Buy Button -->
-  <header>
-    <nav>
-      <a href="index.html" class="logo">Tlotlo's Homely Property</a>
-      
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="buy.html">Buy</a>
-        <a href="rent.html">Rent</a>
-        <a href="post-property.html">Post Property</a>
-        <a href="my-listings.html">My Listings</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </div>
+<!-- HEADER WITH HAMBURGER MENU -->
+<header>
+  <nav>
+    <a href="index.html" class="logo">Tlotlo's Homely Property</a>
 
-      <!-- Rent/Buy Button -->
-      <button onclick="alert('Login / Register feature coming soon!')" class="rent-buy-btn">
-        Rent / Buy
-      </button>
-    </nav>
-  </header>
+    <!-- Hamburger Icon -->
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <!-- Navigation Links -->
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="buy.html">Buy</a>
+      <a href="rent.html">Rent</a>
+      <a href="post-property.html">Post Property</a>
+      <a href="my-listings.html">My Listings</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Rent/Buy Button -->
+    <button onclick="alert('Login / Register feature coming soon!')" class="rent-buy-btn">
+      Rent / Buy
+    </button>
+  </nav>
+</header>
 
   <section class="section">
     <div class="admin-header">
